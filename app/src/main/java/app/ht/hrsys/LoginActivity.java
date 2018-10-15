@@ -330,15 +330,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 String[] pieces = credential.split(":");
                 if (pieces[0].equals(mEmail) ) {
                     // Account exists, return true if the password matches.
-                    if (pieces[1].equals(mPassword)) {
-                        Intent intent = new Intent(LoginActivity.this , BottomNavigationActivity.class);
-                        startActivity(intent);
-                    } else {
-
-                    }
-                } else {
-
+                    if(pieces[1].equals(mPassword))
+                        return true;
                 }
+                else
+                    return false;
             }
 
             // TODO: register the new account here.
@@ -351,7 +347,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
 
             if (success) {
-                finish();
+                Intent intent = new Intent(LoginActivity.this , BottomNavigationActivity.class);
+                startActivity(intent);
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
